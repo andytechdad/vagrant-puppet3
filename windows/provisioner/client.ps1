@@ -98,5 +98,14 @@ Get-Service puppet | Stop-Service -PassThru | Set-Service -StartupType disabled
 
 Write-Host "Puppet successfully installed."
 
+Write-Host "Installing Ruby..."
+
+$ruby_inst_process = Start-Process -FilePath "c:\vagrant\files\rubyinstaller-2.1.9-x64.exe" -ArgumentList "/silent /tasks='assocfiles,modpath'" -PassThru -Wait
+
+if ($ruby_inst_process.ExitCode -ne 0) {
+    "Ruby 2.1.9 installation failed"
+    exit 0
+}
+
 write-output "FINISHED"
 Write-Host "FINISHED"
